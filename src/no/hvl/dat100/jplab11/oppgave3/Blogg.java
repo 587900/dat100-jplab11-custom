@@ -2,71 +2,106 @@ package no.hvl.dat100.jplab11.oppgave3;
 
 import no.hvl.dat100.jplab11.common.TODO;
 import no.hvl.dat100.jplab11.oppgave1.*;
+import no.hvl.dat100.jplab11.oppgave2.Tekst;
 
 public class Blogg {
 
-	// TODO: objektvariable 
+	//har vi lov å bruke ArrayList?
+	Innlegg[] innleggtabell;
+	int nesteledig;
 
-	public Blogg() {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
-	}
+	public Blogg() { this(20); }	//start på 20, i følge oppgåve
 
 	public Blogg(int lengde) {
-		throw new UnsupportedOperationException(TODO.constructor("Blogg"));
+		innleggtabell = new Innlegg[lengde];
+		nesteledig = 0;
 	}
 
-	public int getAntall() {
-		throw new UnsupportedOperationException(TODO.method());
-	}
+	public int getAntall() { return nesteledig; }
 	
-	public Innlegg[] getSamling() {
-		throw new UnsupportedOperationException(TODO.method());
-
-	}
+	public Innlegg[] getSamling() { return innleggtabell; }
 	
 	public int finnInnlegg(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i = 0; i < nesteledig; ++i) {
+			if (innlegg.erLik(innleggtabell[i])) return i;
+		}
+		return -1;
 	}
 
 	public boolean finnes(Innlegg innlegg) {
-		throw new UnsupportedOperationException(TODO.method());
+		return finnInnlegg(innlegg) >= 0;
 	}
 
 	public boolean ledigPlass() {
-		throw new UnsupportedOperationException(TODO.method());
-
+		return nesteledig < innleggtabell.length;
 	}
 	
 	public boolean leggTil(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
+		if (finnes(innlegg) || !ledigPlass()) return false;
+		innleggtabell[nesteledig++] = innlegg;
+		return true;
 	}
 	
 	public String toString() {
-		throw new UnsupportedOperationException(TODO.method());
+		String s = getAntall() + "\n";
+		for (int i = 0; i < nesteledig; ++i) s += innleggtabell[i].toString();
+		return s;
 	}
 
 	// valgfrie oppgaver nedenfor
 	
 	public void utvid() {
-		throw new UnsupportedOperationException(TODO.method());
+		Innlegg[] neww = new Innlegg[Math.max(innleggtabell.length * 2, 1)];
+		for (int i = 0; i < nesteledig; ++i) neww[i] = innleggtabell[i];
+		innleggtabell = neww;
 	}
 	
 	public boolean leggTilUtvid(Innlegg innlegg) {
-
-		throw new UnsupportedOperationException(TODO.method());
-		
+		if (finnes(innlegg)) return false;
+		if (!ledigPlass()) utvid();
+		innleggtabell[nesteledig++] = innlegg;
+		return true;
 	}
 	
 	public boolean slett(Innlegg innlegg) {
-		
-		throw new UnsupportedOperationException(TODO.method());
+		int pos = finnInnlegg(innlegg);
+		if (pos < 0) return false;
+		innleggtabell[pos] = innleggtabell[--nesteledig];
+		innleggtabell[nesteledig] = null;
+		return true;
 	}
 	
-	public int[] search(String keyword) {
-		
-		throw new UnsupportedOperationException(TODO.method());
+		//dette var koda vi fekk, likna ikkje på oppgåva
+		public int[] search(String keyword) {
+			int[] ret = new int[innleggtabell.length];
+			int index = 0;
+			
+			for (int i = 0; i < nesteledig; ++i) {
+				Innlegg x = innleggtabell[i];
+				if (!(x instanceof Tekst)) continue;
+				if (((Tekst)x).search(keyword)) ret[index++] = x.getId();
+			}
+			
+			int[] aRet = new int[index];
+			System.arraycopy(ret, 0, aRet, 0, index);
 
-	}
+			return aRet;
+		}
+		
+		//denne koda fekk vi ikkje, men står i oppgåva
+		public int[] search(String user, String keyword) {
+			int[] ret = new int[innleggtabell.length];
+			int index = 0;
+			
+			for (int i = 0; i < nesteledig; ++i) {
+				Innlegg x = innleggtabell[i];
+				if (!(x instanceof Tekst)) continue;
+				if (((Tekst)x).search(user, keyword)) ret[index++] = x.getId();		//einaste forskjell her
+			}
+			
+			int[] aRet = new int[index];
+			System.arraycopy(ret, 0, aRet, 0, index);
+
+			return aRet;
+		}
 }
