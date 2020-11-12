@@ -7,7 +7,6 @@ public class Bilde extends Tekst {
 	private String url;
 	
 	public Bilde(int id, String bruker, String dato, String tekst, String url) { this(id, bruker, dato, 0, tekst, url); }
-
 	public Bilde(int id, String bruker, String dato, int likes, String tekst, String url) {
 		super(id, bruker, dato, likes, tekst);
 		this.url = url;

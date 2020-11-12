@@ -9,9 +9,7 @@ public abstract class Innlegg {
 	private String dato;
 	private int likes;
 	
-	/*public Innlegg() {
-		
-	}*/
+	/*public Innlegg() {}*/
 	
 	public Innlegg(int id, String bruker, String dato) { this(id, bruker, dato, 0); }
 	public Innlegg(int id, String bruker, String dato, int likes) {

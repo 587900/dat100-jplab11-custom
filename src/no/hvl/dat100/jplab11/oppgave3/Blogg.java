@@ -6,7 +6,6 @@ import no.hvl.dat100.jplab11.oppgave2.Tekst;
 
 public class Blogg {
 
-	//har vi lov å bruke ArrayList?
 	Innlegg[] innleggtabell;
 	int nesteledig;
 
@@ -71,37 +70,37 @@ public class Blogg {
 		return true;
 	}
 	
-		//dette var koda vi fekk, likna ikkje på oppgåva
-		public int[] search(String keyword) {
-			int[] ret = new int[innleggtabell.length];
-			int index = 0;
-			
-			for (int i = 0; i < nesteledig; ++i) {
-				Innlegg x = innleggtabell[i];
-				if (!(x instanceof Tekst)) continue;
-				if (((Tekst)x).search(keyword)) ret[index++] = x.getId();
-			}
-			
-			int[] aRet = new int[index];
-			System.arraycopy(ret, 0, aRet, 0, index);
-
-			return aRet;
+	//dette var koda vi fekk, likna ikkje på oppgåva
+	public int[] search(String keyword) {
+		int[] ret = new int[innleggtabell.length];
+		int index = 0;
+		
+		for (int i = 0; i < nesteledig; ++i) {
+			Innlegg x = innleggtabell[i];
+			if (!(x instanceof Tekst)) continue;
+			if (((Tekst)x).search(keyword)) ret[index++] = x.getId();
 		}
 		
-		//denne koda fekk vi ikkje, men står i oppgåva
-		public int[] search(String user, String keyword) {
-			int[] ret = new int[innleggtabell.length];
-			int index = 0;
-			
-			for (int i = 0; i < nesteledig; ++i) {
-				Innlegg x = innleggtabell[i];
-				if (!(x instanceof Tekst)) continue;
-				if (((Tekst)x).search(user, keyword)) ret[index++] = x.getId();		//einaste forskjell her
-			}
-			
-			int[] aRet = new int[index];
-			System.arraycopy(ret, 0, aRet, 0, index);
+		int[] aRet = new int[index];
+		System.arraycopy(ret, 0, aRet, 0, index);
 
-			return aRet;
+		return aRet;
+	}
+	
+	//denne koda fekk vi ikkje, men står i oppgåva
+	public int[] search(String user, String keyword) {
+		int[] ret = new int[innleggtabell.length];
+		int index = 0;
+		
+		for (int i = 0; i < nesteledig; ++i) {
+			Innlegg x = innleggtabell[i];
+			if (!(x instanceof Tekst)) continue;
+			if (((Tekst)x).search(user, keyword)) ret[index++] = x.getId();		//einaste forskjell her
 		}
+		
+		int[] aRet = new int[index];
+		System.arraycopy(ret, 0, aRet, 0, index);
+
+		return aRet;
+	}
 }

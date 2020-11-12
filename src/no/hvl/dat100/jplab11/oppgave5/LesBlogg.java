@@ -45,7 +45,7 @@ public class LesBlogg {
 
 	}
 	
-	private static int ri(BufferedReader br) throws IOException{ return Integer.parseInt(br.readLine()); }
-	private static String rl(BufferedReader br) throws IOException { return br.readLine(); }
+	private static int ri(BufferedReader br) throws IOException{ return Integer.parseInt(br.readLine()); }	//read int
+	private static String rl(BufferedReader br) throws IOException { return br.readLine(); }				//read line
 	
 }

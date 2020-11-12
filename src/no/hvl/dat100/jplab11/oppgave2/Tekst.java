@@ -8,7 +8,6 @@ public class Tekst extends Innlegg {
 	private String tekst;
 	
 	public Tekst(int id, String bruker, String dato, String tekst) { this(id, bruker, dato, 0, tekst); }
-	
 	public Tekst(int id, String bruker, String dato, int likes, String tekst) {
 		super(id, bruker, dato, likes);
 		this.tekst = tekst;
@@ -22,7 +21,7 @@ public class Tekst extends Innlegg {
 		return "TEKST\n" + super.toString() + tekst + "\n";
 	}
 	
-	//hjelpemetode 3m)
+	//hjelpemetode oppg 3m)
 	public boolean search(String bruker, String ord) {
 		return bruker.equals(getBruker()) && search(ord);
 	}
